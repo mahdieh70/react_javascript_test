@@ -2,27 +2,13 @@ import { useState, useRef } from "react";
 import PropTypes from "prop-types";
 import { useOnClickOutside } from "../../utiles/useClickOutside";
 
-const Select = ({ data }) => {
-  const [value, setValue] = useState("");
+const Select = ({ data, onChange, clickHandler, value }) => {
   const [showDropDown, setShowDropDown] = useState(false);
-  const [countryCode, setCountryCode] = useState("");
 
   const selectRef = useRef(null);
   useOnClickOutside(selectRef, () => {
     setShowDropDown(false);
   });
-
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  // const country = query.data?.data?.data?.results;
-  // console.log(country);
-
-  const clickHandler = (code) => {
-    // setValue(targetValue);
-    setCountryCode(code);
-  };
 
   const clickHandleDropDown = () => {
     setShowDropDown(true);
@@ -59,7 +45,7 @@ const Select = ({ data }) => {
                   className="font-medium text-base cursor-pointer"
                   onClick={() => clickHandler(item.item.code)}
                 >
-                  {item.value}
+                  {item?.item?.name}
                 </p>
               </div>
             );
@@ -75,8 +61,10 @@ export { Select };
 Select.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      item: PropTypes.string.isRequired,
     })
   ).isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  clickHandler: PropTypes.func.isRequired,
 };

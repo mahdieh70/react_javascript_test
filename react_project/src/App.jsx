@@ -4,13 +4,7 @@ import HomePage from "./components/homePage";
 import SideBar from "./components/sideBar";
 import Table from "./components/table";
 import SearchBar from "./components/searchBar";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 // Create a client
 const queryClient = new QueryClient();
